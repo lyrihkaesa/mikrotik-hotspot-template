@@ -72,7 +72,8 @@ chap-missing = web browser did not send challenge response (try again, enable Ja
 # has sent an error string with Access-Reject message, then it will
 # override this setting.
 
-invalid-username = invalid username or password
+# invalid-username = invalid username or password
+invalid-username = username dan password salah
 
 # invalid-mac
 # Local users (on hotspot server) can be bound to some MAC address. If login
