@@ -15,7 +15,6 @@
     x-data="{ 
       tab: 'voucher', 
       focusInput() { 
-        return;
         setTimeout(() => { 
           const input = this.tab === 'voucher' ? document.getElementById('form-voucher') : document.getElementById('form-username'); 
           if (input) input.focus(); 
