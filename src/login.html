@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pondok Mbodo Hotspot - Login</title>
+    <link href="./css/output.css" rel="stylesheet" />
+  </head>
+
+  <body class="bg-gray-950">
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post" style="display: none">
+      <input type="hidden" name="username" />
+      <input type="hidden" name="password" />
+      <input type="hidden" name="dst" value="$(link-orig)" />
+      <input type="hidden" name="popup" value="true" />
+    </form>
+
+    <script src="/md5.js"></script>
+    <script>
+      function doLogin() {
+        document.sendin.username.value = document.login.username.value;
+        document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+        document.sendin.submit();
+        return false;
+      }
+    </script>
+    $(endif)
+    <section class="">
+      <div class="px-4">
+        <div class="flex items-center flex-col">
+          <img src="./img/favicon-150x150.png" alt="Logo Pondok Mbodo" />
+          <form class="space-y-2" name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+            <input type="hidden" name="dst" value="$(link-orig)" />
+            <input type="hidden" name="popup" value="true" />
+            
+            <p class="text-gray-400">
+              $(if error == "")Tolong Masuk untuk menggunakan layanan internet hotspot $(if trial == 'yes')<br />Tersedia Trial Gratis,
+              <a class="text-lime-400" href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">klik disini</a>.$(endif) $(endif)
+            </p>
+            $(if error)
+                <p class="text-red-500">$(error)</p>
+            $(endif)`
+
+            <div class="relative text-white">
+              <input class="peer py-3 px-4 ps-11 block w-full bg-gray-800 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+              name="username" type="text" value="$(username)" placeholder="Username">
+              <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
+                <img class="size-4 text-white fill-white" src="img/user.svg" alt="#" />
+              </div>
+            </div>
+          
+            <div class="relative text-white">
+              <input class="peer py-3 px-4 ps-11 block w-full bg-gray-800 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+              name="password" type="password" placeholder="Password">
+              <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
+                <img class="size-4" src="img/password.svg" alt="#" />
+              </div>
+            </div>
+
+            <input class="bg-lime-400 hover:bg-lime-500 text-white font-semibold py-3 w-full rounded-lg cursor-pointer" type="submit" value="Connect" />
+          </form>
+          <p class="py-6 text-white">Powered by <a href="https://lyrihkaesa.github.io" class="text-lime-400">Kaesa Lyrih</a></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
