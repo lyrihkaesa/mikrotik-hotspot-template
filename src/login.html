@@ -6,6 +6,7 @@
     <meta http-equiv="expires" content="-1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pondok Mbodo Hotspot - Login</title>
+    <link rel="preload" type="image/x-icon" href="/favicon.ico" as="icon" />
     <link href="./css/output.css" rel="stylesheet" />
     <script defer src="./js/alpine-3.14.8/cdn.min.js"></script>
   </head>
@@ -36,11 +37,14 @@
     <script>
       function doLogin() {
         if (document.login.voucher) {
-          document.sendin.username.value = document.login.voucher.value;
-          document.sendin.password.value = hexMD5('$(chap-id)' + document.login.voucher.value + '$(chap-challenge)');
+          const voucher = document.login.voucher.value + '';
+          document.sendin.username.value = voucher.trim();
+          document.sendin.password.value = hexMD5('$(chap-id)' + voucher.trim() + '$(chap-challenge)');
         } else {
-          document.sendin.username.value = document.login.username.value;
-          document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+          const username = document.login.username.value + '';
+          const password = document.login.password.value + '';
+          document.sendin.username.value = username.trim();
+          document.sendin.password.value = hexMD5('$(chap-id)' + password.trim() + '$(chap-challenge)');
         }
         document.sendin.submit();
         return false;
@@ -77,6 +81,7 @@
           </button>
         </div>
 
+        <!-- prettier-ignore -->
         <form class="w-full max-w-md" name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
           <div class="flex flex-col space-y-4">
             <input type="hidden" name="dst" value="$(link-orig)" />
